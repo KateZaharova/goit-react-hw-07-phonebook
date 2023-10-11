@@ -5,7 +5,11 @@ import { ContactForm } from "./Form/Form";
 import { ContactList } from "./ContactList/ContactList";
 import { Filter } from "./Filter/Filter";
 //import { nanoid } from 'nanoid';
-//import { useState, useEffect } from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchContacts } from "redux/operations";
+import { getError, getIsLoading } from "redux/selectors";
+
 
 /*
 const getIntialFilters = () => {
@@ -32,6 +36,15 @@ const getIntialContacts = () => {
 
 */
 export const App = () => {
+  const dispatch = useDispatch();
+  const isLoading = useSelector(getIsLoading);
+  const error = useSelector(getError);
+  //const { items, isLoading, error } = useSelector(getContacts);
+
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
+
   //const [contacts, setContacts] = useState(getIntialContacts());
   //const [filter, setFilter] = useState(getIntialFilters());
 
@@ -74,16 +87,17 @@ const findName = filterName => {
 
 return (
     <Layout
-      style={{
+      /*style={{
         height: '100vh',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
         fontSize: 40,
         color: '#010101'
-      }}>
+    }}*/>
     <h1>Phonebook</h1>
     <ContactForm />
+      {isLoading && !error && <b>Request in progress...</b>}
     <h2>Contacts</h2>
     <Filter />
     <ContactList/>

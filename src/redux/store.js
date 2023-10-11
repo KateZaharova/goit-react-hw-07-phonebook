@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { filterReducer } from "./filterSlice";
 import { contactsReducer } from "./contactsSlice";
-import { persistStore, persistReducer } from "redux-persist";
-import storage from "redux-persist/lib/storage";
+//import { persistStore, persistReducer } from "redux-persist";
+//import storage from "redux-persist/lib/storage";
 //import rootReducer from "./reducers"
 
+
+/*
 const persistConfigFilter = {
     key: "filter",
     storage,    
@@ -32,4 +34,12 @@ export const store = configureStore({
     },
 });
 
-export const persistor = persistStore(store);
+export const persistor = persistStore(store);*/
+
+
+export const store = configureStore({
+    reducer: {
+        contacts: contactsReducer,
+        filter: filterReducer,
+    },
+});

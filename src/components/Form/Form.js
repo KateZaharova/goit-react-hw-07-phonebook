@@ -1,11 +1,11 @@
 import { Formik } from 'formik';
 import { StyledForm, FieldInfo, ButtonAdd, ErrorMsg } from "./Form.styled";
 import * as Yup from 'yup';
-import { addContact } from 'redux/contactsSlice';
+//import { addContact } from 'redux/contactsSlice';
 import { useDispatch } from "react-redux";
 import { getContacts} from "redux/selectors";
 import { useSelector } from "react-redux";
-
+import { addContact } from "redux/operations";
 
 
 const ContactFormSchema = Yup.object().shape({
@@ -23,7 +23,7 @@ export const ContactForm = () => {
     const dispatch = useDispatch();
        
     const addHandContact = (values) => {
-        if (-1 !== contacts.list.findIndex(option => option.contact.name === values.name)) {
+        if (-1 !== contacts.findIndex(item => item.name === values.name)) {
             alert(`${values.name} is already in contacts.`);
             return;
         }
@@ -61,7 +61,16 @@ export const ContactForm = () => {
     );
 };
 
-
+/*export const TaskForm = () => {
+  const dispatch = useDispatch();
+  const handleSubmit = event => {
+    event.preventDefault();
+    const form = event.target;
+    dispatch(addTask(event.target.elements.text.value));
+    form.reset();
+  };
+  // Остальное код компонента
+};*/
 
   
 

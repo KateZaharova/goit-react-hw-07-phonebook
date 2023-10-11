@@ -1,16 +1,14 @@
 import { ButtonDlt, Wrapper } from "./ContactItem.styled";
 import { useDispatch } from "react-redux";
-import { deleteContact } from "redux/contactsSlice";
+import { deleteContact } from "redux/operations";
 
 export const ContactItem = ({ item: { name, phone }, itemId }) => {
     const dispatch = useDispatch();
-    const deleteHandContact = (itemId) => dispatch(deleteContact(itemId));
+    const deleteHandContact = () => dispatch(deleteContact(itemId));
     return (
         <Wrapper>
             <>{name}: {phone}</>
-            <ButtonDlt type="button" onClick={() => deleteHandContact(itemId)}>Delete</ButtonDlt>
+            <ButtonDlt type="button" onClick={deleteHandContact}>Delete</ButtonDlt>
         </Wrapper>
-        
-        
-    )
-}
+    );
+};

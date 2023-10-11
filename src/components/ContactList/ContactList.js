@@ -2,15 +2,15 @@ import { ContactItem } from "../ContactItem/ContactItem";
 import { LiItem } from "./ContactList.styled";
 import { getContacts, getFilter } from "redux/selectors";
 import { useSelector } from "react-redux";
-import { deleteContact } from "redux/contactsSlice";
 
 
 
 export const ContactList = () => {
     const contacts = useSelector(getContacts);
     const filter = useSelector(getFilter).value;
-    const filteredContacts = contacts.list.filter(item => {  
-      return item.contact.name
+
+    const filteredContacts = contacts.filter(item => {  
+      return item.name
         .toLowerCase()
         .includes(filter.toLowerCase());
     });
@@ -20,7 +20,7 @@ export const ContactList = () => {
             <ul>
                 {filteredContacts.map(item => (
                     <LiItem key={item.id}>
-                        <ContactItem item={item.contact} itemId={item.id} onDelete={deleteContact} />
+                        <ContactItem item={{ name: item.name, phone: item.phone }} itemId={item.id} />
                     </LiItem>
                 ))}
             </ul>
